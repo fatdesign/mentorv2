@@ -853,6 +853,13 @@ function cancelSubscription() {
 
 // --- Beim Laden der Seite ausführen ---
 window.onload = () => {
+    // Show role switcher only on localhost or if explicitly enabled via query parameter
+    const urlParams = new URLSearchParams(window.location.search);
+    if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' || urlParams.has('demo') || urlParams.has('debug')) {
+        const switcher = document.querySelector('.role-switcher-container');
+        if (switcher) switcher.style.display = 'flex';
+    }
+
     // Initiales Rendern
     renderTeenChat();
     renderParentChat();
