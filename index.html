@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aura Mentor | Die geschützte Online-Mentoring-Plattform für Jugendliche</title>
+    <meta name="description" content="Eine innovative Online-Mentor-Plattform für Jugendliche. Mit asymmetrischen Videocalls zum Schutz der Privatsphäre und einem geschützten Eltern-Kontrollzentrum.">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- Dynamischer globaler Hintergrund-Raster -->
+    <div class="grid-backdrop"></div>
+
+    <!-- ==========================================================================
+         PERSISTENTES STEUERUNGSPANEL / ROLLEN-WECHSLER
+         ========================================================================== -->
+    <div class="role-switcher-container">
+        <div class="role-switcher-title">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            Ansicht
+        </div>
+        <button class="role-btn active" id="btn-switch-landing" onclick="switchView('landing')">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+            Webseite
+        </button>
+        <button class="role-btn" id="btn-switch-teen" onclick="switchView('teen')">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            Teen-Portal
+        </button>
+        <button class="role-btn" id="btn-switch-parent" onclick="switchView('parent')">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            Eltern-Hub
+        </button>
+    </div>
+
+    <!-- ==========================================================================
+         VIEW 1: DEUTSCHE BRAND LANDING PAGE
+         ========================================================================== -->
+    <div id="view-landing" class="app-view active-view">
+        <header class="nav-bar">
+            <div class="logo">
+                <div class="logo-icon">✨</div>
+                AURA MENTOR
+            </div>
+            <ul class="nav-links">
+                <li><a href="#concept">Das Konzept</a></li>
+                <li><a href="#asymmetric">Sicherheits-Features</a></li>
+                <li><a href="#pricing">Tarife & Preise</a></li>
+            </ul>
+            <button class="btn btn-primary" onclick="openAuthGate('teen')">Teen-Portal betreten</button>
+        </header>
+
+        <section class="hero-section">
+            <div class="badge">
+                <span style="color: var(--color-accent);">●</span> Live interaktive Demo-Version
+            </div>
+            <h1 class="hero-title">
+                Der Mentor, den sie brauchen.<br>
+                <span class="gradient-text">Die Privatsphäre, die sie verdienen.</span>
+            </h1>
+            <p class="hero-subtitle">
+                Aura verbindet Jugendliche (12–18 Jahre) mit qualifizierten, empathischen Mentoren. Unser Konzept basiert auf zwei Säulen: unerschütterliches Vertrauen für den Teenager und absolute Sicherheit für die Familie.
+            </p>
+            <div class="hero-ctas">
+                <button class="btn btn-primary" onclick="openAuthGate('teen')">Teen-Portal testen (Sicherer Chat)</button>
+                <button class="btn btn-secondary" onclick="openAuthGate('parent')">Eltern-Kontrollzentrum erkunden</button>
+            </div>
+
+            <!-- Interaktive Konzept-Karten -->
+            <div class="concept-teaser" id="concept">
+                <div class="teaser-card teaser-card-safety">
+                    <span class="teaser-icon">🔒</span>
+                    <h3>Asymmetrischer Videoschutz</h3>
+                    <p>
+                        Jugendliche sehen ihren Mentor in voller High-Definition-Videoauflösung, um eine echte, visuelle Bindung aufzubauen. Zum Schutz der Jugendlichen bleibt <strong>ihre eigene Kamera jedoch zu 100% deaktiviert</strong>. Mentoren leiten per Stimme und Bildschirmfreigabe – geschützt vor unerwünschten Blicken.
+                    </p>
+                    <div class="asymmetric-mockup" id="asymmetric">
+                        <div class="mockup-header">
+                            <span>Interaktives Anruf-Raster (Simulation)</span>
+                            <span style="color: var(--color-safety); font-weight: bold;">● Schutz aktiv</span>
+                        </div>
+                        <div class="mockup-grid">
+                            <div class="mockup-feed">
+                                <img src="mentor_avatar.png" alt="Mentor Alex Avatar" onerror="this.src='https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=400'">
+                                <div class="mockup-label">Mentor Alex (Video übertragen)</div>
+                            </div>
+                            <div class="mockup-feed" style="background: #030712;">
+                                <div class="shield-overlay">
+                                    <div class="shield-lock-icon">🛡️</div>
+                                    <div class="shield-text">Kamera gesperrt</div>
+                                    <div class="shield-desc">Mentor hört dich, sieht dich aber nicht.</div>
+                                </div>
+                                <div class="mockup-label">Du (Kamera geschützt)</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="teaser-card">
+                    <span class="teaser-icon">💬</span>
+                    <h3>Zwei-Wege-Sicherheits-Chat</h3>
+                    <p>
+                        Das Vertrauen eines Teenagers ist heilig. Wenn sie fürchten müssen, dass Eltern sensible Fragen über Pubertät, Schulstress oder Mental Health mitlesen, verstummen sie. Aura zeigt Eltern die professionellen Antworten des Mentors, <strong>verschlüsselt aber die genauen Fragen des Jugendlichen</strong>.
+                    </p>
+                    <div class="chat-split-mockup">
+                        <div class="split-box">
+                            <div class="split-header" style="color: #a5b4fc;">
+                                🧑‍💻 Ansicht für das Kind (Unzensiert)
+                            </div>
+                            <div class="split-content">
+                                <div class="mockup-msg mockup-msg-child">Ich habe so riesigen Prüfungsstress nächste Woche und kann nachts kaum schlafen.</div>
+                                <div class="mockup-msg mockup-msg-mentor">Prüfungsangst ist total real, aber deine Noten definieren nicht deinen Wert. Lass uns gemeinsam einen entspannten Lernplan machen.</div>
+                            </div>
+                        </div>
+                        <div class="split-box">
+                            <div class="split-header" style="color: var(--color-accent);">
+                                🛡️ Ansicht für Eltern (Sicherheitsfilter aktiv)
+                            </div>
+                            <div class="split-content">
+                                <div class="mockup-msg mockup-msg-child parent-msg-overlay">
+                                    <span class="parent-blurred-msg">Ich habe so riesigen Prüfungsstress nächste Woche und kann nachts kaum schlafen.</span>
+                                    <span class="parent-shield-badge">🔒 Privatsphäre des Kindes geschützt</span>
+                                </div>
+                                <div class="mockup-msg mockup-msg-mentor">Prüfungsangst ist total real, aber deine Noten definieren nicht deinen Wert. Lass uns gemeinsam einen entspannten Lernplan machen.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tarife & Abrechnung -->
+        <section class="pricing-section" id="pricing">
+            <div class="badge badge-safety">🛡️ Sichere Buchung & Abrechnung</div>
+            <h2 class="pricing-title">Flexible Tarife für jede Familie</h2>
+            <p class="pricing-subtitle">Wähle das Abonnement, das am besten in euren Wochenplan passt. Jederzeit im Eltern-Portal änderbar oder kündbar.</p>
+            
+            <div class="pricing-grid">
+                <!-- Tier 1 -->
+                <div class="pricing-card">
+                    <div class="tier-name">Starter Beacon</div>
+                    <div class="tier-desc">Perfekt für wöchentliche Check-ins, Strukturierung und leichte Lernunterstützung.</div>
+                    <div class="tier-price">
+                        <span class="price-currency">€</span>
+                        <span class="price-val">149</span>
+                        <span class="price-freq">/Monat</span>
+                    </div>
+                    <ul class="features-list">
+                        <li class="feature-item"><span class="feature-check">✓</span> <strong>2 Sitzungen</strong> / Woche (je 45 Min.)</li>
+                        <li class="feature-item"><span class="feature-check">✓</span> Unbegrenzter gesicherter Text-Chat</li>
+                        <li class="feature-item"><span class="feature-check">✓</span> Asymmetrischer Videoschutz aktiv</li>
+                        <li class="feature-item"><span class="feature-check">✓</span> Geschütztes Eltern-Kontrollzentrum</li>
+                    </ul>
+                    <button class="btn btn-secondary" onclick="purchasePlan('Starter Beacon', 149)">Tarif auswählen</button>
+                </div>
+
+                <!-- Tier 2 -->
+                <div class="pricing-card popular">
+                    <div class="popular-ribbon">Sehr beliebt</div>
+                    <div class="tier-name">Growth Horizon</div>
+                    <div class="tier-desc">Unser Standard. Tiefergehendes Coaching für mentale Gesundheit, Fokus und Wochenstruktur.</div>
+                    <div class="tier-price">
+                        <span class="price-currency">€</span>
+                        <span class="price-val">279</span>
+                        <span class="price-freq">/Monat</span>
+                    </div>
+                    <ul class="features-list">
+                        <li class="feature-item"><span class="feature-check">✓</span> <strong>4 Sitzungen</strong> / Woche (je 45 Min.)</li>
+                        <li class="feature-item"><span class="feature-check">✓</span> Unbegrenzter Chat & Sprachnachrichten</li>
+                        <li class="feature-item"><span class="feature-check">✓</span> Premium Asymmetrischer Videoschutz</li>
+                        <li class="feature-item"><span class="feature-check">✓</span> Erweiterte Fortschrittsberichte</li>
+                        <li class="feature-item"><span class="feature-check">✓</span> Bevorzugter Match mit Mentor Alex</li>
+                    </ul>
+                    <button class="btn btn-primary" onclick="purchasePlan('Growth Horizon', 279)">Tarif auswählen</button>
+                </div>
+
+                <!-- Tier 3 -->
+                <div class="pricing-card">
+                    <div class="tier-name">Apex Summit</div>
+                    <div class="tier-desc">Lückenlose Begleitung, intensive Motivationsarbeit und Krisen-Supportnetzwerk.</div>
+                    <div class="tier-price">
+                        <span class="price-currency">€</span>
+                        <span class="price-val">499</span>
+                        <span class="price-freq">/Monat</span>
+                    </div>
+                    <ul class="features-list">
+                        <li class="feature-item"><span class="feature-check">✓</span> <strong>Unbegrenzte Sitzungen</strong> / Woche</li>
+                        <li class="feature-item"><span class="feature-check">✓</span> Exklusiver Top-Tier Mentor zugeordnet</li>
+                        <li class="feature-item"><span class="feature-check">✓</span> 24/7 Notfall-Kanal für Krisensituationen</li>
+                        <li class="feature-item"><span class="feature-check">✓</span> Geschwister-Unterstützung optional</li>
+                    </ul>
+                    <button class="btn btn-secondary" onclick="purchasePlan('Apex Summit', 499)">Tarif auswählen</button>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- ==========================================================================
+         VIEW AUTH: LOGIN & REGISTRIERUNG
+         ========================================================================== -->
+    <div id="view-auth" class="app-view">
+        <div class="auth-container" style="display: flex; justify-content: center; align-items: center; min-height: 80vh; padding: 20px;">
+            <div class="widget-card auth-card" style="width: 100%; max-width: 440px; padding: 30px; box-shadow: var(--shadow-glow);">
+                <div class="auth-header" style="text-align: center; margin-bottom: 24px;">
+                    <div class="logo-icon" style="margin: 0 auto 12px auto; width: 48px; height: 48px; font-size: 1.4rem; display: flex; align-items: center; justify-content: center; background: var(--gradient-hero); border-radius: 50%; box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);">✨</div>
+                    <h2 id="auth-title" style="font-size: 1.5rem; color: white; font-family: var(--font-heading);">Konto erstellen</h2>
+                    <p id="auth-subtitle" class="text-muted" style="font-size: 0.85rem; margin-top: 6px;">Erstelle dein kostenloses Konto bei Aura Safe.</p>
+                </div>
+
+                <div class="auth-role-selector" style="display: flex; background: var(--bg-darker); padding: 4px; border-radius: 12px; border: 1px solid var(--border-glass-glow); margin-bottom: 20px;">
+                    <button class="role-tab active" id="auth-role-teen" onclick="setAuthRole('teen')" style="flex: 1; padding: 10px; border-radius: 8px; border: none; background: transparent; color: var(--text-muted); font-family: var(--font-heading); font-weight: bold; font-size: 0.85rem; cursor: pointer; transition: var(--transition-fast);">Teenager</button>
+                    <button class="role-tab" id="auth-role-parent" onclick="setAuthRole('parent')" style="flex: 1; padding: 10px; border-radius: 8px; border: none; background: transparent; color: var(--text-muted); font-family: var(--font-heading); font-weight: bold; font-size: 0.85rem; cursor: pointer; transition: var(--transition-fast);">Elternteil</button>
+                </div>
+
+                <div class="auth-form" style="display: flex; flex-direction: column; gap: 14px;">
+                    <div class="form-group">
+                        <label for="auth-email" style="display: block; font-size: 0.75rem; margin-bottom: 6px; font-weight: 600; color: var(--text-muted);">E-Mail-Adresse</label>
+                        <input type="email" id="auth-email" class="p2p-input" placeholder="name@beispiel.de" style="width: 100%; padding: 10px 14px; border-radius: 12px; border: 1px solid var(--border-glass); background: var(--bg-darker); color: white; font-size: 0.85rem; outline: none;">
+                    </div>
+                    <div class="form-group">
+                        <label for="auth-password" style="display: block; font-size: 0.75rem; margin-bottom: 6px; font-weight: 600; color: var(--text-muted);">Passwort</label>
+                        <input type="password" id="auth-password" class="p2p-input" placeholder="Mindestens 6 Zeichen" style="width: 100%; padding: 10px 14px; border-radius: 12px; border: 1px solid var(--border-glass); background: var(--bg-darker); color: white; font-size: 0.85rem; outline: none;">
+                    </div>
+                    <div class="form-group" id="parent-link-group" style="display: none;">
+                        <label for="auth-parent-link-id" style="display: block; font-size: 0.75rem; margin-bottom: 6px; font-weight: 600; color: var(--text-muted);">Teenager Koppelungs-ID (Optional)</label>
+                        <input type="text" id="auth-parent-link-id" class="p2p-input" placeholder="Z.B. AURA-LEO-9140" style="width: 100%; padding: 10px 14px; border-radius: 12px; border: 1px solid var(--border-glass); background: var(--bg-darker); color: white; font-size: 0.85rem; outline: none;">
+                        <span style="font-size: 0.68rem; color: var(--text-muted); display: block; margin-top: 4px; line-height: 1.3;">Koppelt dein Elternkonto direkt mit dem geschützten Verlauf deines Kindes.</span>
+                    </div>
+
+                    <button class="btn btn-primary" id="btn-auth-submit" onclick="submitAuthForm()" style="margin-top: 10px; width: 100%;">Konto erstellen</button>
+                </div>
+
+                <div class="auth-toggle-text" style="text-align: center; margin-top: 20px; font-size: 0.8rem; color: var(--text-muted);">
+                    <span id="auth-toggle-msg">Bereits registriert?</span> 
+                    <a href="#" id="auth-toggle-link" onclick="toggleAuthMode(event)" style="color: var(--color-primary-glow); font-weight: 600; text-decoration: none; margin-left: 4px;">Jetzt einloggen</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==========================================================================
+         VIEW 2: TEEN PORTAL ("DAS SCHUTZREVIER")
+         ========================================================================== -->
+    <div id="view-teen" class="app-view">
+        <div class="portal-container">
+            <!-- Desktop-Seitennavigation (wird auf Mobilgeräten ausgeblendet) -->
+            <aside class="portal-sidebar">
+                <div>
+                    <div class="sidebar-brand">
+                        <div class="logo-icon">✨</div>
+                        Aura Safe
+                    </div>
+                    <ul class="sidebar-menu">
+                        <li class="sidebar-link active" onclick="scrollToElement('teen-chat-card')">
+                            <span>💬</span> Chat-Sicherheitsraum
+                        </li>
+                        <li class="sidebar-link" onclick="openVideoRoom()">
+                            <span>🎥</span> Videocall starten
+                        </li>
+                        <li class="sidebar-link" onclick="scrollToElement('calendar-w')">
+                            <span>📅</span> Sitzung buchen
+                        </li>
+                    </ul>
+                </div>
+                <div class="user-profile-widget">
+                    <div class="profile-avatar">L</div>
+                    <div class="profile-info">
+                        <h4>Leo (Teenager)</h4>
+                        <p class="profile-badge" style="color: var(--color-safety); font-weight: bold; font-size: 0.65rem;">🔒 Schutz aktiv</p>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Teen Hauptbereich -->
+            <main class="portal-main">
+                <!-- Speziell optimierte Handy-Navigation (wird auf dem Desktop ausgeblendet) -->
+                <div class="teen-mobile-nav">
+                    <button class="teen-mob-nav-btn active" onclick="scrollToElement('teen-chat-card')">
+                        <span>💬</span> Chat
+                    </button>
+                    <button class="teen-mob-nav-btn" onclick="openVideoRoom()">
+                        <span>🎥</span> Anruf
+                    </button>
+                    <button class="teen-mob-nav-btn" onclick="scrollToElement('calendar-w')">
+                        <span>📅</span> Kalender
+                    </button>
+                </div>
+
+                <!-- P2P Verbindungs-Widget für Teenager -->
+                <div class="p2p-sync-widget">
+                    <div class="p2p-status-indicator">
+                        <span class="p2p-status-dot offline" id="teen-p2p-dot"></span>
+                        <span id="teen-p2p-status">P2P Echtzeit-Kopplung: Inaktiv (Warte auf Verbindung...)</span>
+                    </div>
+                    <div class="p2p-code-display">
+                        Koppelungs-ID für Eltern: <strong id="teen-peer-id">AURA-LEO</strong>
+                    </div>
+                </div>
+
+                <div class="dashboard-header">
+                    <div class="welcome-box">
+                        <h1>Hey Leo, willkommen zurück! ✨</h1>
+                        <p>Dein Mentor <strong>Alex</strong> ist online und bereit, sich auszutauschen.</p>
+                    </div>
+                    <button class="btn btn-safety desktop-call-btn" onclick="openVideoRoom()">
+                        <span class="shield-lock-icon" style="font-size: 1rem; margin-bottom: 0;">🛡️</span> Videocall starten (Kamera privat)
+                    </button>
+                </div>
+
+                <div class="dashboard-grid">
+                    <!-- Chat Widget -->
+                    <div class="widget-card chat-widget" id="teen-chat-card">
+                        <div class="widget-title">
+                            <span>💬 Mentor Chat-Sicherheitsraum</span>
+                            <span style="font-size: 0.78rem; color: var(--color-safety); font-weight: 600; display: flex; align-items: center; gap: 4px;">
+                                <span style="display:inline-block; width:6px; height:6px; border-radius:50%; background:var(--color-safety);"></span> Verbindung gesichert
+                            </span>
+                        </div>
+                        
+                        <!-- Chatlog -->
+                        <div class="chat-messages-container" id="teen-chat-log">
+                            <!-- Wird dynamisch befüllt -->
+                        </div>
+
+                        <!-- Schreibindikator (Typing Simulator) -->
+                        <div class="typing-indicator" id="typing-bubble">
+                            <div class="typing-dot"></div>
+                            <div class="typing-dot"></div>
+                            <div class="typing-dot"></div>
+                        </div>
+
+                        <!-- Chat-Eingabezeile -->
+                        <div class="chat-input-row">
+                            <div class="chat-input-wrapper">
+                                <input type="text" class="chat-input" id="teen-chat-input" placeholder="Schreibe eine Nachricht oder wähle ein Thema unten..." onkeypress="handleChatKey(event)">
+                            </div>
+                            <button class="btn btn-primary" onclick="sendTeenMessage()">Senden</button>
+                        </div>
+
+                        <!-- Schnell-Themenchips (Quick Prompts für einfaches Demo-Testen) -->
+                        <div class="quick-prompts">
+                            <span class="prompt-chip" onclick="clickPrompt('Ich habe extremen Prüfungsstress nächste Woche und kann nachts kaum schlafen.')">🎓 Prüfungsstress</span>
+                            <span class="prompt-chip" onclick="clickPrompt('Ich habe mich heftig mit meinen Eltern gestritten, sie verstehen mich einfach nicht.')">👪 Elternstreit</span>
+                            <span class="prompt-chip" onclick="clickPrompt('In der Schule fühle ich mich gerade total ausgeschlossen und weiß nicht, wie ich dazugehören soll.')">🎒 Ausgeschlossen sein</span>
+                            <span class="prompt-chip" onclick="clickPrompt('Wollte nur kurz sagen: Der Lernplan, den wir gebaut haben, funktioniert super!')">🚀 Lernplan klappt!</span>
+                        </div>
+                    </div>
+
+                    <!-- Buchungskalender Widget -->
+                    <div class="widget-card calendar-widget" id="calendar-w">
+                        <div class="widget-title">
+                            <span>📅 Sitzung buchen (45 Min.)</span>
+                        </div>
+                        <div class="calendar-header">
+                            <span>Mai 2026</span>
+                            <span style="font-size: 0.8rem; color: var(--text-muted);">2 von 4 Sitzungen diese Woche verbleibend</span>
+                        </div>
+                        <div class="calendar-days-grid" id="calendar-grid">
+                            <!-- Wird dynamisch befüllt -->
+                        </div>
+                        <div class="booking-status-box" style="margin-top: 24px;">
+                            <h4 style="font-size: 0.85rem; margin-bottom: 6px; color: var(--color-safety);">ℹ️ Details zum Videoschutz</h4>
+                            <p style="font-size: 0.75rem; line-height: 1.4; color: var(--text-muted);">
+                                Jede gebuchte Sitzung startet als asymmetrischer Anruf. Du siehst Alex per Video, deine eigene Kamera bleibt jedoch gesperrt. So kannst du absolut unbefangen sprechen.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- ==========================================================================
+         VIEW 3: PARENT PORTAL ("ELTERN-KONTROLLZENTRUM")
+         ========================================================================== -->
+    <div id="view-parent" class="app-view">
+        <header class="nav-bar" style="position: static;">
+            <div class="logo">
+                <div class="logo-icon">🛡️</div>
+                ELTERN-HUB
+            </div>
+            <div style="font-family: var(--font-heading); font-size: 0.9rem; color: var(--text-muted);">
+                Aktives Kind: <strong>Leo</strong>
+            </div>
+        </header>
+
+        <main class="portal-main">
+            <!-- P2P Verbindungs-Widget für Eltern -->
+            <div class="p2p-sync-widget">
+                <div class="p2p-status-indicator">
+                    <span class="p2p-status-dot offline" id="parent-p2p-dot"></span>
+                    <span id="parent-p2p-status">P2P Echtzeit-Kopplung: Nicht verbunden</span>
+                </div>
+                <div class="p2p-input-row" style="display: flex; gap: 8px; margin-top: 10px;">
+                    <input type="text" id="parent-connect-id" class="p2p-input" value="AURA-LEO" placeholder="Koppelungs-ID eingeben..." style="flex-grow: 1; padding: 10px 14px; border-radius: 12px; border: 1px solid var(--border-glass); background: var(--bg-darker); color: white; font-family: var(--font-body); font-size: 0.85rem; outline: none;">
+                    <button class="btn btn-primary" id="btn-parent-connect" onclick="connectToTeen()" style="padding: 8px 16px; font-size: 0.8rem; width: auto; flex-shrink: 0;">Verbinden</button>
+                </div>
+            </div>
+
+            <!-- Eltern Kennzahlen-Karten -->
+            <div class="parent-metrics-row">
+                <div class="metric-card">
+                    <div class="metric-icon-box">💬</div>
+                    <div class="metric-info">
+                        <h5>Abonnierter Tarif</h5>
+                        <h3 id="parent-plan-name">Growth Horizon</h3>
+                    </div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-icon-box safety">🛡️</div>
+                    <div class="metric-info">
+                        <h5>Zwei-Wege-Schutz</h5>
+                        <h3 style="color: var(--color-safety);">100% Aktiv</h3>
+                    </div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-icon-box">📅</div>
+                    <div class="metric-info">
+                        <h5>Absolvierte Sitzungen</h5>
+                        <h3>14 Sitzungen</h3>
+                    </div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-icon-box">⏳</div>
+                    <div class="metric-info">
+                        <h5>Gecoachte Stunden</h5>
+                        <h3>10,5 Stunden</h3>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Eltern Zensiertes Chatlog & Erklärungen -->
+            <div class="parent-audit-grid">
+                <!-- Zensiertes Chat Widget -->
+                <div class="widget-card" style="display: flex; flex-direction: column; height: 530px;">
+                    <div class="widget-title">
+                        <span>🛡️ Geschütztes Chat-Kontrollprotokoll</span>
+                        <span style="font-size: 0.78rem; color: var(--color-accent); font-weight: 600;">🔒 Dual-Shield Filter Aktiv</span>
+                    </div>
+
+                    <!-- Geberrtes Chatlog -->
+                    <div class="chat-messages-container" id="parent-chat-log">
+                        <!-- Wird dynamisch befüllt, Kindernachrichten sind stark verschwommen -->
+                    </div>
+                </div>
+
+                <!-- Erklärungen & Tarifeinstellungen -->
+                <div class="why-shielded-banner">
+                    <h4>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                        Was bedeutet Kinderschutz?
+                    </h4>
+                    <p>
+                        Aura nutzt eine neuartige Vertrauens-Architektur. Um Jugendlichen zu helfen, sich ohne Scham- oder Angstgefühle zu öffnen, werden ihre Fragen vor den Eltern verborgen.
+                    </p>
+                    <p>
+                        <strong>Warum Sie nur die Antworten des Mentors sehen:</strong>
+                        Wenn Teenager befürchten müssen, dass ihre Eltern jedes Wort bei schwierigen Themen (z. B. Identität, Streitigkeiten, Mental Health) mitlesen, suchen sie keine Hilfe. Durch das Einsehen von Alex' Antworten behalten Sie den vollen Überblick über die Qualität des Coachings, während Ihr Kind den geschützten Raum bekommt, den es dringend benötigt.
+                    </p>
+                    
+                    <div style="border-top: 1px solid var(--border-glass); padding-top: 20px; margin-top: 10px;">
+                        <h4 style="color: #ffffff; font-size: 0.95rem; margin-bottom: 12px;">💳 Tarif-Optionen & Zahlung</h4>
+                        <div style="background: rgba(255,255,255,0.02); padding: 12px; border-radius: 12px; border: 1px solid var(--border-glass); font-size: 0.8rem; margin-bottom: 12px;">
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+                                <span style="color: var(--text-muted);">Aktiver Tarif:</span>
+                                <strong id="parent-plan-display">Growth Horizon (€279)</strong>
+                            </div>
+                            <div style="display: flex; justify-content: space-between;">
+                                <span style="color: var(--text-muted);">Nächste Abbuchung:</span>
+                                <span>24. Juni 2026</span>
+                            </div>
+                        </div>
+                        <div style="display: flex; gap: 10px;">
+                            <button class="btn btn-secondary" onclick="scrollToPricing()" style="padding: 8px 16px; font-size: 0.8rem; flex-grow: 1;">Tarif wechseln</button>
+                            <button class="btn btn-danger" onclick="cancelSubscription()" style="padding: 8px 16px; font-size: 0.8rem; flex-grow: 1;">Tarif kündigen</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- ==========================================================================
+         POPUP OVERLAY: SIMULATOR FÜR ASYMMETRISCHEN VIDEOCALL
+         ========================================================================== -->
+    <div id="video-room" class="video-room-overlay">
+        <div class="video-room-container">
+            <div class="video-room-header">
+                <div class="logo" style="font-size: 1.1rem;">
+                    <div class="logo-icon" style="width:24px; height:24px; font-size: 0.75rem;">✨</div>
+                    Aura SafeRoom Call
+                </div>
+                <div class="call-timer">
+                    <span class="pulse-dot"></span>
+                    <span>AUFZEICHNUNG SICHER: </span>
+                    <span id="call-time-elapsed">00:00</span>
+                </div>
+            </div>
+
+            <!-- Call Grid: Links Mentor, Rechts zensierter Teenager feed -->
+            <div class="video-grid">
+                <!-- Mentor-Bildstream -->
+                <div class="video-window video-window-mentor">
+                    <img src="mentor_avatar.png" alt="Mentor Alex face-to-face" onerror="this.src='https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=800'">
+                    <div class="video-nameplate">
+                        <span>🟢 Mentor Alex</span>
+                    </div>
+                </div>
+
+                <!-- Teen-Bildstream (Gesperrt & geschützt) -->
+                <div class="video-window video-window-teen">
+                    <div class="room-shield-active">
+                        <div class="shield-lock-icon" style="font-size: 3rem;">🛡️</div>
+                        <h3>Kamera Privatsphäre Aktiv</h3>
+                        <p>Kamera zum Schutz der Privatsphäre automatisch blockiert. Mikrofon ist aktiv.</p>
+                        <div class="mic-wave-indicator" style="margin-top: 15px;">
+                            <span class="mic-bar"></span>
+                            <span class="mic-bar"></span>
+                            <span class="mic-bar"></span>
+                            <span class="mic-bar"></span>
+                            <span class="mic-bar"></span>
+                            <span style="font-size: 0.65rem; color: var(--color-safety); margin-left: 6px; font-weight: bold; text-transform: uppercase;">Sprache aktiv</span>
+                        </div>
+                    </div>
+                    <div class="video-nameplate">
+                        <span>🔒 Leo (Du)</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="video-room-footer">
+                <button class="control-btn active-control" title="Mikrofon stummschalten">🎤</button>
+                <button class="control-btn" style="background: rgba(239, 68, 68, 0.2); border-color: rgba(239, 68, 68, 0.4); color: #f87171;" title="Kamera durch Sicherheits-Protokoll gesperrt">📷 ❌</button>
+                <button class="control-btn" title="Bildschirm übertragen">🖥️</button>
+                <button class="control-btn decline-btn" onclick="closeVideoRoom()" title="Call beenden">📞 Beenden</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==========================================================================
+         POPUP OVERLAY: TERMINAUSWAHL / UHRZEIT BUCHEN
+         ========================================================================== -->
+    <div id="booking-popup" class="booking-popup-overlay" onclick="closeBookingPopup(event)">
+        <div class="booking-popup" onclick="event.stopPropagation()">
+            <h3 style="font-size: 1.3rem; margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
+                <span>📅</span> Support-Sitzung buchen
+            </h3>
+            <p id="booking-popup-date" style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 20px;">
+                Wähle eine Uhrzeit für den 15. Mai 2026:
+            </p>
+            <div style="display: flex; flex-direction: column; gap: 10px;">
+                <button class="time-slot-btn" onclick="confirmAppointment('15:30')">15:30 Uhr - 16:15 Uhr (Alex Online)</button>
+                <button class="time-slot-btn" onclick="confirmAppointment('17:00')">17:00 Uhr - 17:45 Uhr (Alex Online)</button>
+                <button class="time-slot-btn" onclick="confirmAppointment('18:30')">18:30 Uhr - 19:15 Uhr (Alex Online)</button>
+            </div>
+            <button class="btn btn-secondary" onclick="closeBookingPopup(null)" style="width: 100%; margin-top: 20px;">Abbrechen</button>
+        </div>
+    </div>
+
+    <!-- PeerJS für P2P Echtzeit-Kopplung -->
+    <script src="https://unpkg.com/peerjs@1.4.7/dist/peerjs.min.js"></script>
+    <!-- Script Datei -->
+    <script src="app.js"></script>
+</body>
+</html>
