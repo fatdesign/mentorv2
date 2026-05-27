@@ -4,7 +4,7 @@
 
 // --- Cloudflare Worker Konfiguration ---
 // Ersetze diesen Platzhalter mit der URL deines bereitgestellten Cloudflare Workers!
-const CLOUDFLARE_WORKER_URL = "DEINE_CLOUDFLARE_WORKER_URL"; 
+const CLOUDFLARE_WORKER_URL = "https://aura-mentor-api.f-klavun.workers.dev"; 
 
 // --- Globale P2P-Variablen (PeerJS) ---
 let peerInstance = null;
